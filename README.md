@@ -18,10 +18,12 @@
 
     -   Create the data and logs directories for zookeeper.
         ( These can be anywhere )
-                sudo mkdir -p  /var/log/zookeeper/{data,logs}
+        
+            sudo mkdir -p  /var/log/zookeeper/{data,logs}
 
     -   Change ownership of these directories so that you can read and write into it.
-              sudo chown -R user:user /var/log/zookeeper/{data,logs}
+    
+            sudo chown -R user:user /var/log/zookeeper/{data,logs}
 
     -   Inside the extracted directory in step-2 i.e.
         `kafka_2.11-0.10.0.0.tgz`, add the following configurations in
@@ -56,16 +58,21 @@
         This will contain a unique number between 1 to 255.
         In `zookeeper.properties` there is `server.id` where `id` is the
         identifier which should be mentioned in `myid` file.
+        
+             
             for. eg. on 192.168.178.20
             $ cat /var/log/zookeeper/data/myid
             $ 1
-
+             
     -   Start the zookeeper on both the servers: considering current working directory is : `/home/user/kafka_2.11-0.10.0.0`
+    
             ./bin/zookeeper-server-start.sh config/zookeeper.properties
 
 4.  Setting up kafka brokers on all the machines ( as mentioned above ).
 
     -   Edit the file `config/server.properties`
+    
+           
             # Each node should have a different broker.id, for eg.
             # broker.id = 1, broker.id = 2 on two different nodes
             broker.id=1
@@ -77,6 +84,7 @@
             log.dirs=/var/log/zookeeper/kafka/
             # In our case a list of zookeepers like this ( change ip address)
             zookeeper.connect=192.168.178.22:2181,192.168.178.20:2181
+            
     -   Now start kafka brokers on all the nodes
             bin/kafka-server-start.sh config/server.properties
 
@@ -84,7 +92,9 @@
     Time to test the brokers: 
 
     -   Install `pykafka`
+    
             sudo pip install pykafka --upgrade
+            
     -   Now edit `producer.py` and `consumer.py` to change the ip address for
         your kafka brokers.
 
