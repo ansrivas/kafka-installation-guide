@@ -67,6 +67,10 @@
     -   Start the zookeeper on both the servers: considering current working directory is : `/home/user/kafka_2.11-0.10.0.0`
     
             ./bin/zookeeper-server-start.sh config/zookeeper.properties
+        
+        To start it as a deamon :
+        
+            ./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
 
 4.  Setting up kafka brokers on all the machines ( as mentioned above ).
 
