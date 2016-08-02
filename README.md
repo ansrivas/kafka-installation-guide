@@ -90,7 +90,12 @@
             zookeeper.connect=192.168.178.22:2181,192.168.178.20:2181
             
     -   Now start kafka brokers on all the nodes
-            bin/kafka-server-start.sh config/server.properties
+    
+            ./bin/kafka-server-start.sh config/server.properties
+        
+        To start it as a deamon :
+        
+            ./bin/kafka-server-start.sh -daemon config/server.properties
 
 5.  By this time, we will have two brokers with two zookeepers running
     Time to test the brokers: 
