@@ -89,6 +89,9 @@
             # In our case a list of zookeepers like this ( change ip address)
             zookeeper.connect=192.168.178.22:2181,192.168.178.20:2181
             
+            # this will enable deletion of a topic
+            delete.topic.enable=true
+            
     -   Now start kafka brokers on all the nodes
     
             ./bin/kafka-server-start.sh config/server.properties
@@ -109,3 +112,29 @@
 
     -   In a terminal, run `python producer.py` and then
         in another run `python consumer.py`
+
+6. Few handy commands by this time are as follows:
+    
+    -   Create a topic
+    
+        ```
+        bin/kafka-topics.sh --create --zookeeper 192.168.178.20:2181 --replication-factor 3 --partitions 6 --topic three-partition-topic
+        ```
+    -    Describe a topic
+    
+        ```
+        bin/kafka-topics.sh --describe --zookeeper 192.168.178.20:2181 --topic three-partition-topic
+        ```
+        
+    -    List currently available topics
+    
+        ```
+        bin/kafka-topics.sh --list --zookeeper 192.168.178.20:2181
+        ```
+        
+    -    Delete a topic
+        
+        ```
+        bin/kafka-topics.sh --delete --zookeeper 192.168.178.20:2181 --topic three-partition-topic
+        ```
+        
