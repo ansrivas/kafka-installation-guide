@@ -138,3 +138,8 @@
         bin/kafka-topics.sh --delete --zookeeper 192.168.178.20:2181 --topic three-partition-topic
         ```
         
+    -    Using simple consumer
+        
+        ```
+        bin/kafka-run-class.sh kafka.tools.SimpleConsumerShell --broker-list 192.168.178.20:9092 --partition 0 --topic three-partition-topic
+        ```
