@@ -16,6 +16,8 @@
 3.  Firstly set up zookeeper on the nodes
     ( We will be installing zoo-keeper on both the machines, more information can be found. )
 
+    *Note* : Zookeeper requires that you have a quorum of servers up, where quorum is ceil(N/2). For a 3 server ensemble, that means 2 servers must be up at any time, for a 5 server ensemble, 3 servers need to be up at any time.
+
     -   Create the data and logs directories for zookeeper.
         ( These can be anywhere )
         
