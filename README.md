@@ -147,10 +147,11 @@
         ```
         bin/kafka-run-class.sh kafka.tools.SimpleConsumerShell --broker-list 192.168.178.20:9092 --partition 0 --topic three-partition-topic
         ```
-7. You can set the minimum number of in-sync replicas (ISRs) that must be available for the producer to successfully send messages to a partition using the min.insync.replicas setting. If min.insync.replicas is set to 2 and request.required.acks is set to -1, each message must be written successfully to at least two replicas. This guarantees that the message is not lost unless both hosts crash. 
+7. You can set the minimum number of in-sync replicas (ISRs) that must be available for the producer to successfully send messages to a partition using the min.insync.replicas setting. If `min.insync.replicas` is set to 2 and `request.required.acks` is set to -1, each message must be written successfully to at least two replicas. This guarantees that the message is not lost unless both hosts crash. [src](https://www.cloudera.com/documentation/kafka/latest/topics/kafka_ha.html#xd_583c10bfdbd326ba-590cb1d1-149e9ca9886--6fec__section_tld_ff2_lq)
     
     ```
     bin/kafka-topics.sh --alter --zookeeper 192.168.178.20:2181 --topic three-partition-topic  \
     --config min.insync.replicas=2
     ```
 
+8. When `min.insync.replicas=2` property is set, the topic should be replicated with factor `2 + N`. Where `N` is the number of brokers which could fail, and Kafka producer will still be able to publish messages to the cluster. Recommended setting is to configure replication factor 3 for the topic (or more). [src](http://mkuthan.github.io/blog/2016/01/29/spark-kafka-integration2/)
