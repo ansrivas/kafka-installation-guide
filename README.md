@@ -94,6 +94,8 @@
             # this will enable deletion of a topic
             delete.topic.enable=true
             
+            unclean.leader.election.enable=false
+            
     -   Now start kafka brokers on all the nodes
     
             ./bin/kafka-server-start.sh config/server.properties
@@ -145,3 +147,10 @@
         ```
         bin/kafka-run-class.sh kafka.tools.SimpleConsumerShell --broker-list 192.168.178.20:9092 --partition 0 --topic three-partition-topic
         ```
+7. You can set the minimum number of in-sync replicas (ISRs) that must be available for the producer to successfully send messages to a partition using the min.insync.replicas setting. If min.insync.replicas is set to 2 and request.required.acks is set to -1, each message must be written successfully to at least two replicas. This guarantees that the message is not lost unless both hosts crash. 
+    
+    ```
+    bin/kafka-topics.sh --alter --zookeeper 192.168.178.20:2181 --topic three-partition-topic  \
+    --config min.insync.replicas=2
+    ```
+
