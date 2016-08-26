@@ -8,7 +8,9 @@ def generate_data(msg, use_rdkafka=False):
     topic_name = b'test-topic'
     client = KafkaClient(hosts=bootstrap_servers)
     topic = client.topics[topic_name]
-    producer = topic.get_producer(use_rdkafka=use_rdkafka)
+    producer = topic.get_producer(use_rdkafka=use_rdkafka,
+                                  required_acks=all, 
+                                  compression=CompressionType.SNAPPY)
 
     print "Publishing async messages !"
     # produce the message
